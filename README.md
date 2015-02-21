@@ -1,2 +1,3 @@
-# Remotely
-Run tasks on remote servers via SSH.
+# Reemote [WIP]
+
+A fluent interface for defining running tasks on remote servers via SSH.
