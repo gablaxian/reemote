@@ -53,7 +53,7 @@ class SecLibGateway implements GatewayInterface {
      */
     protected function setHostAndPort($host)
     {
-        if ( ! str_contains($host, ':'))
+        if ( strpos($host, ':') === false )
         {
             $this->host = $host;
         }
@@ -218,7 +218,7 @@ class SecLibGateway implements GatewayInterface {
      */
     protected function readRsaKey(array $auth)
     {
-        if (isset($auth['key'])) return file_get_contents($auth['key']));
+        if (isset($auth['key'])) return file_get_contents($auth['key']);
 
         return $auth['keytext'];
     }

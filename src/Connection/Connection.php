@@ -1,8 +1,9 @@
 <?php namespace Amu\Reemote\Connection;
 
 use Closure;
-use Amu\Reemote\NullOutput;
-use Amu\Reemote\OutputInterface;
+use Amu\Reemote\Output\NullOutput;
+use Amu\Reemote\Output\OutputInterface;
+use Amu\Reemote\Gateway\SecLibGateway;
 
 class Connection implements ConnectionInterface {
 

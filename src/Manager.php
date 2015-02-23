@@ -2,6 +2,8 @@
 
 use Amu\Reemote\Output\NullOutput;
 use Amu\Reemote\Output\ConsoleOutput;
+use Amu\Reemote\Connection\Connection;
+use Amu\Reemote\Connection\MultiConnection;
 
 class Manager {
 

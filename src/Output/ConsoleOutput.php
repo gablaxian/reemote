@@ -11,7 +11,7 @@ class ConsoleOutput implements OutputInterface {
 
     public function writeln($text = '')
     {
-        $this->write("$text\n", $pipe);
+        $this->write("$text\n");
     }
 
 }
