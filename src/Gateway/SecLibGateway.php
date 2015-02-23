@@ -205,7 +205,8 @@ class SecLibGateway implements GatewayInterface {
      */
     protected function loadRsaKey(array $auth)
     {
-        with($key = $this->getKey($auth))->loadKey($this->readRsaKey($auth));
+        $key = $this->getKey($auth);
+        $key->loadKey($this->readRsaKey($auth));
 
         return $key;
     }
@@ -230,8 +231,9 @@ class SecLibGateway implements GatewayInterface {
      * @return \Crypt_RSA
      */
     protected function getKey(array $auth)
-    {
-        with($key = $this->getNewKey())->setPassword(array_get($auth, 'keyphrase'));
+    {   
+        $key = $this->getNewKey();
+        $key->setPassword($auth['keyphrase']);
 
         return $key;
     }
