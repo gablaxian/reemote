@@ -23,7 +23,7 @@ interface GatewayInterface {
      * @param  string  $command
      * @return void
      */
-    public function run($command);
+    public function run($command, callable $callback = null);
 
     /**
      * Upload a local file to the server.
@@ -42,13 +42,6 @@ interface GatewayInterface {
      * @return void
      */
     public function putString($remote, $contents);
-
-    /**
-     * Get the next line of output from the server.
-     *
-     * @return string|null
-     */
-    public function nextLine();
 
     /**
      * Get the exit status of the last command.

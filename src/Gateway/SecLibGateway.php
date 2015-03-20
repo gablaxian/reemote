@@ -92,9 +92,9 @@ class SecLibGateway implements GatewayInterface {
      * @param  string  $command
      * @return void
      */
-    public function run($command)
+    public function run($command, callable $callback = null)
     {
-        $this->getConnection()->exec($command, false);
+        return $this->getConnection()->exec($command, $callback);
     }
 
     /**
@@ -121,6 +121,17 @@ class SecLibGateway implements GatewayInterface {
     }
 
     /**
+     * Get the contents of a remote file.
+     *
+     * @param  string  $remote
+     * @return string
+     */
+    public function getStdError($remote)
+    {
+        return $this->getConnection()->getStdError();
+    }
+
+    /**
      * Upload a local file to the server.
      *
      * @param  string  $local
@@ -142,18 +153,6 @@ class SecLibGateway implements GatewayInterface {
     public function putString($remote, $contents)
     {
         $this->getConnection()->put($remote, $contents);
-    }
-
-    /**
-     * Get the next line of output from the server.
-     *
-     * @return string|null
-     */
-    public function nextLine()
-    {
-        $value = $this->getConnection()->_get_channel_packet(NET_SSH2_CHANNEL_EXEC);
-
-        return $value === true ? null : $value;
     }
 
     /**

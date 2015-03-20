@@ -2,6 +2,7 @@
 
 use Amu\Reemote\Output\NullOutput;
 use Amu\Reemote\Output\ConsoleOutput;
+use Amu\Reemote\Output\OutputInterface;
 use Amu\Reemote\Connection\Connection;
 use Amu\Reemote\Connection\MultiConnection;
 
@@ -13,9 +14,12 @@ class Manager {
 
     protected $groups = array();
 
-    public function __construct($defaultConfig)
+    protected $outputHandler;
+
+    public function __construct($defaultConfig, OutputInterface $outputHandler = null)
     {
         $this->config[$this->defaultConnection] = $defaultConfig;
+        $this->outputHandler = $outputHandler ?: new ConsoleOutput();
     }
 
     public function addConnection($name, $config)
@@ -118,7 +122,7 @@ class Manager {
      */
     protected function setOutput(Connection $connection)
     {
-        $output = php_sapi_name() == 'cli' ? new ConsoleOutput : new NullOutput;
+        $output = php_sapi_name() == 'cli' ? clone $this->outputHandler : new NullOutput;
 
         $connection->setOutput($output);
     }
