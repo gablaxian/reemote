@@ -1,6 +1,8 @@
 <?php namespace Amu\Reemote\Gateway;
 
-use Net_SFTP, Crypt_RSA, System_SSH_Agent;
+use phpseclib\Net\SFTP;
+use phpseclib\Crypt\RSA;
+use phpseclib\System\SSH\Agent;
 
 class SecLibGateway implements GatewayInterface {
 
@@ -230,7 +232,7 @@ class SecLibGateway implements GatewayInterface {
      * @return \Crypt_RSA
      */
     protected function getKey(array $auth)
-    {   
+    {
         $key = $this->getNewKey();
         $key->setPassword($auth['keyphrase']);
 
@@ -250,21 +252,21 @@ class SecLibGateway implements GatewayInterface {
     /**
      * Get a new SSH Agent instance.
      *
-     * @return \System_SSH_Agent
+     * @return \System\SSH\Agent
      */
     public function getAgent()
     {
-        return new System_SSH_Agent;
+        return new Agent;
     }
 
     /**
      * Get a new RSA key instance.
      *
-     * @return \Crypt_RSA
+     * @return \Crypt\RSA
      */
     public function getNewKey()
     {
-        return new Crypt_RSA;
+        return new RSA;
     }
 
     /**
@@ -298,15 +300,15 @@ class SecLibGateway implements GatewayInterface {
     }
 
     /**
-     * Get the underlying Net_SFTP connection.
+     * Get the underlying SFTP connection.
      *
-     * @return \Net_SFTP
+     * @return \Net\SFTP
      */
     public function getConnection()
     {
         if ($this->connection) return $this->connection;
 
-        return $this->connection = new Net_SFTP($this->host, $this->port);
+        return $this->connection = new SFTP($this->host, $this->port);
     }
 
 }
