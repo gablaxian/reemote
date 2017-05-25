@@ -96,6 +96,7 @@ class SecLibGateway implements GatewayInterface {
      */
     public function run($command, callable $callback = null)
     {
+        $this->getConnection()->setTimeout(120);
         return $this->getConnection()->exec($command, $callback);
     }
 
